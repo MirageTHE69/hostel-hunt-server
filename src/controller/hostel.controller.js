@@ -36,7 +36,28 @@ export const getNearbyHostels = catchAsync(async (req, res, next) => {
         }
     ]);
 
+    
+
     console.log(`Found ${hostels.length} hostels`);
+    res.status(200).json({
+        status: 'success',
+        results: hostels.length,
+        data: {
+            hostels
+        }
+    });
+});
+
+
+export const getHostelsByCity = catchAsync(async (req, res, next) => {
+    const { city } = req.query;
+
+    if (!city) {
+        return next(new AppError('Please provide a city name!', 400));
+    }
+
+    const hostels = await Hostel.find({ city });
+
     res.status(200).json({
         status: 'success',
         results: hostels.length,

@@ -5,11 +5,15 @@ import {
   getHostel,
   updateHostel,
   deleteHostel,
-  getNearbyHostels
+  getNearbyHostels,
+  getHostelsByCity  // Import the new function
+
 } from '../controller/hostel.controller.js'; 
 
 const router = express.Router();
 router.get('/nearby', getNearbyHostels);
+router.get('/city', getHostelsByCity);  // Add route for getting hostels by city
+
 
 router.route('/')
   .get(getAllHostels)
